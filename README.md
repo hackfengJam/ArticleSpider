@@ -39,4 +39,4 @@
         `-- 利用elasticsearch和爬取到的数据+django框架搭建搜索网站（此部分代码将在以后上传）
 </pre>
 
-**注：使用此代码前，需创建mysql数据库，详见settings**
+**PS：使用此代码前，需创建mysql数据库，详见ArticleSpider/settings.py**
