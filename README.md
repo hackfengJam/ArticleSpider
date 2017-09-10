@@ -26,7 +26,7 @@
         |-- 分析scrapy-redis源码
         `-- 集成bloomfilter到scrapy-redis中
     `-- Elasticsearch （ArticleSpider.pipelines.ElasticsearchPipeline;）(ArticleSpider.items.JobBoleArticleItem.save_to_es;)
-        |-- 学习 elasticsearch-rtf
+        |-- 安装 elasticsearch-rtf
         |-- 学习使用 elasticsearch-head、kibana
         |-- 学习使用 elasticsearch的Python API： elasticsearch-dsl
         `-- 利用elasticsearch和爬取到的数据+django框架搭建搜索网站（此部分代码将在以后上传）
