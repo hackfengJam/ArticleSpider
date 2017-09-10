@@ -25,7 +25,7 @@
         |-- 分布式爬虫原理
         |-- 分析scrapy-redis源码
         `-- 集成bloomfilter到scrapy-redis中
-    |-- Elasticsearch （ArticleSpider.pipelines.ElasticsearchPipeline;）(ArticleSpider.items.JobBoleArticleItem.save_to_es;)
+    `-- Elasticsearch （ArticleSpider.pipelines.ElasticsearchPipeline;）(ArticleSpider.items.JobBoleArticleItem.save_to_es;)
         |-- 学习 elasticsearch-rtf
         |-- 学习使用 elasticsearch-head、kibana
         |-- 学习使用 elasticsearch Python API elasticsearch-dsl
