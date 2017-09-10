@@ -1,6 +1,11 @@
 # ArticleSpider
 通过scrapy，爬取知乎，伯乐在线，拉钩网
 
+**注：**
+>
+这是一个进阶项目，需要有一定的爬虫知识，如果不是很懂基本的爬虫原理，请自行学习一下爬虫基础知识。
+我有一个对应的仓库[MyPythonForSpider](http://git.oschina.net/hackfun/MyPythonForSpider "baidumusicspider")，是一个单线程爬取百度音乐数据的实例，比较适合刚入门的朋友。
+
 这是一个基于web抓取框架[scrapy](https://baike.baidu.com/item/scrapy/7914913?fr=aladdin "scrapy")，实现的对于，知乎，伯乐在线，拉勾网的爬取。
 
 ### 涉及到的知识点有
@@ -32,4 +37,4 @@
         `-- 利用elasticsearch和爬取到的数据+django框架搭建搜索网站（此部分代码将在以后上传）
 </pre>
 
-**注：使用此代码前，需创建mysql数据库**
+**注：使用此代码前，需创建mysql数据库，详见settings**
