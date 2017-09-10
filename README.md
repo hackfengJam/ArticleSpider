@@ -8,9 +8,9 @@
 
 
 
-**这是一个基于web抓取框架[scrapy](https://baike.baidu.com/item/scrapy/7914913?fr=aladdin "scrapy")，实现的对于，知乎，伯乐在线，拉勾网的爬取。**
+**这是一个基于web抓取框架[scrapy](https://baike.baidu.com/item/scrapy/7914913?fr=aladdin "scrapy")，实现的对于知乎，伯乐在线，拉勾网的爬取。**
 
-### 涉及到的知识点有
+### 涉及到的知识点
 <pre>
 |-- 基础
 |   |-- 正则表达式 [jobbole.py](ArticleSpider/spiders/jobbole.py）
