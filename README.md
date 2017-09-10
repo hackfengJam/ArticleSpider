@@ -21,9 +21,15 @@
 |   |-- 将selenium集成到scrapy中 
 |   `-- scrapy log配置
 `-- |后续(在此项目中没有体现，后续我将上传此部分代码)
-    |-- scrapy-redis分布式爬虫原理
-    |-- scrapy-redis源码
-    |-- 集成bloomfilter到scrapy-redis中
+    |-- scrapy-redis
+        |-- 分布式爬虫原理
+        |-- 分析scrapy-redis源码
+        `-- 集成bloomfilter到scrapy-redis中
+    |-- Elasticsearch （ArticleSpider.pipelines.ElasticsearchPipeline;）(ArticleSpider.items.JobBoleArticleItem.save_to_es;)
+        |-- 学习 elasticsearch-rtf
+        |-- 学习使用 elasticsearch-head、kibana
+        |-- 学习使用 elasticsearch Python API elasticsearch-dsl
+        `-- 利用elasticsearch和爬取到的数据+django框架搭建搜索网站（此部分代码将在以后上传）
 </pre>
 
 **注：使用此代码前，需创建mysql数据库**
