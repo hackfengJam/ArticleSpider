@@ -28,7 +28,7 @@
     `-- Elasticsearch （ArticleSpider.pipelines.ElasticsearchPipeline;）(ArticleSpider.items.JobBoleArticleItem.save_to_es;)
         |-- 学习 elasticsearch-rtf
         |-- 学习使用 elasticsearch-head、kibana
-        |-- 学习使用 elasticsearch Python API elasticsearch-dsl
+        |-- 学习使用 elasticsearch的Python API： elasticsearch-dsl
         `-- 利用elasticsearch和爬取到的数据+django框架搭建搜索网站（此部分代码将在以后上传）
 </pre>
 
