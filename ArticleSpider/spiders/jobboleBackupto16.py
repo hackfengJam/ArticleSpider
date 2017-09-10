@@ -8,7 +8,7 @@ from ArticleSpider.items import JobBoleArticleItem
 from ArticleSpider.utils.common import get_md5
 
 class JobboleSpider(scrapy.Spider):
-    name = 'jobbole'
+    name = 'jobboleBackupto16'
     allowed_domains = ['blog.jobbole.com']
     start_urls = ['http://blog.jobbole.com/all-posts/']
     # start_urls = ['http://blog.jobbole.com/112239/']

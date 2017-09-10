@@ -74,14 +74,14 @@ class RandomUserAgentMiddleware(object):
     def process_request(self, request, spider):
         # from ArticleSpider.settings import user_agent_list
         # import random
-        # request.header.setdefault("User-Agent", user_agent_list[random.randint(0, len(user_agent_list)-1)])
+        # request.headers.setdefault("User-Agent", user_agent_list[random.randint(0, len(user_agent_list)-1)])
 
         def get_ua():
             return getattr(self.ua, self.ua_type)
 
         # random_agent = get_ua()  # 调试的时候用
 
-        request.header.setdefault("User-Agent", get_ua())
+        request.headers.setdefault("User-Agent", get_ua())
         # request.meta["proxy"] = "http://113.128.90.192:48888"
 
 
@@ -90,3 +90,30 @@ class RandomProxyMiddleware(object):
     def process_request(self, request, spider):
         get_ip = GetIP()
         request.meta["proxy"] = get_ip.get_random_ip()
+
+from selenium import webdriver
+from scrapy.http import HtmlResponse
+
+
+class JSPageMiddleware(object):
+    # def __init__(self):
+    #     self.browser = webdriver.Chrome(executable_path="G:/Document/PythonServerEnvironment/SelniumWebdriver/chromedriver.exe")
+    #     super(JSPageMiddleware, self).__init__()
+
+    # 通过chrome请求动态网页
+    def process_request(self, request, spider):
+        if spider.name == "jobbole":
+            # chrome_opt = webdriver.ChromeOptions()
+            # prefs = {"profile.managed_default_content_settings.images": 2}
+            # chrome_opt.add_experimental_option("prefs", prefs)
+            # browser = webdriver.Chrome( executable_path="G:/Document/PythonServerEnvironment/SelniumWebdriver/chromedriver.exe", chrome_options=chrome_opt)
+            # browser = webdriver.Chrome(executable_path="G:/Document/PythonServerEnvironment/SelniumWebdriver/chromedriver.exe")
+            spider.browser.get(request.url)
+            import time
+            time.sleep(3)
+            print("访问：{0}".format(request.url))
+
+            return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8", request=request)
+
+
+

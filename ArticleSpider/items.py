@@ -12,6 +12,15 @@ from scrapy.loader.processors import MapCompose, TakeFirst, Join
 from ArticleSpider.utils.common import extract_num
 from ArticleSpider.settings import SQL_DATETIME_FORMAT, SQL_DATE_FORMAT
 from w3lib.html import remove_tags
+from ArticleSpider.models.es_types import ArticleType
+import redis
+
+
+from elasticsearch_dsl.connections import connections
+
+es = connections.create_connection(ArticleType._doc_type.using)
+
+redis_cli = redis.StrictRedis()
 
 
 class ArticlespiderItem(scrapy.Item):
@@ -33,10 +42,13 @@ def add_jobbole(value):
 
 
 def get_nums(value):
+    # print(value)
     match_re = re.match(r'.*?(\d+).*', value)
     if match_re:
         nums = match_re.group(1)
-    return nums
+        return nums
+    else:
+        return 0
 
 
 def remove_comment_tags(value):
@@ -51,9 +63,29 @@ def return_value(value):
     return value
 
 
+def gen_suggests(index, info_tuple):
+    # 根据字符串生成搜索建议数据
+    # python工程师  title  10
+    # python工程师  text   3
+    # 不能覆盖，所以用set
+    used_words = set()
+    suggests = []
+    for text, weight in info_tuple:
+        if text:
+            # 调用es得analyze接口分析字符串
+            words = es.indices.analyze(index=index, analyzer="ik_max_word", params={'filter': ["lowercase"]}, body=text)
+            analyzed_words = set(r["token"] for r in words["tokens"] if len(r["token"]) > 1)
+            new_words = analyzed_words - used_words
+        else:
+            new_words = set()
+        if new_words:
+            suggests.append({"input": list(new_words), "weight": weight})
+    return suggests
+
+
 class ArticleItemLoader(ItemLoader):
     # 自定义ItemLoader
-    default_out_processor = TakeFirst()
+    default_output_processor = TakeFirst()
 
 
 class JobBoleArticleItem(scrapy.Item):
@@ -69,9 +101,11 @@ class JobBoleArticleItem(scrapy.Item):
     )
     url = scrapy.Field()
     url_object_id = scrapy.Field(
-        out_processor=MapCompose(return_value)
+        output_processor=MapCompose(return_value)
     )
-    front_image_url = scrapy.Field()
+    front_image_url = scrapy.Field(
+        output_processor=MapCompose(return_value)
+    )
     front_image_path = scrapy.Field()
     praise_nums = scrapy.Field(
         input_processor=MapCompose(get_nums)
@@ -83,8 +117,8 @@ class JobBoleArticleItem(scrapy.Item):
         input_processor=MapCompose(get_nums)
     )
     tags = scrapy.Field(
-        out_processor=Join(","),
-        input_processor=MapCompose(remove_comment_tags)
+        input_processor=MapCompose(remove_comment_tags),
+        output_processor=Join(","),
     )
     content = scrapy.Field()
 
@@ -98,6 +132,30 @@ class JobBoleArticleItem(scrapy.Item):
                             """
         params = (self["title"], self["url"], self["create_date"], self["fav_nums"])
         return insert_sql, params
+
+    def save_to_es(self):
+        article = ArticleType()
+        article.title = self['title']
+        article.create_date = self["create_date"]
+        article.content = remove_tags(self["content"])
+        article.front_image_url = self["front_image_url"]
+        if "front_image_path" in self:
+            article.front_image_path = self["front_image_path"]
+        article.praise_nums = self["praise_nums"]
+        article.fav_nums = self["fav_nums"]
+        article.comment_nums = self["comment_nums"]
+        article.url = self["url"]
+        article.tags = self["tags"]
+        article.meta.id = self["url_object_id"]
+
+        # article.suggest = [{"input":[], "weight":2}]
+        article.suggest = gen_suggests(ArticleType._doc_type.index, ((article.title, 10), (article.tags, 7)))
+
+        article.save()
+
+        redis_cli.incr("jobble_count")
+
+        return
 
 
 class ZhihuQuestionItem(scrapy.Item):

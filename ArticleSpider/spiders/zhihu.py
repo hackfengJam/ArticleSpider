@@ -13,7 +13,6 @@ from ArticleSpider.items import ZhihuAnswerItem, ZhihuQuestionItem
 from ArticleSpider.settings import user_agent_list
 
 
-
 class ZhihuSpider(scrapy.Spider):
     name = 'zhihu'
     allowed_domains = ['www.zhihu.com']
@@ -31,7 +30,7 @@ class ZhihuSpider(scrapy.Spider):
 
     }
     custom_settings = {
-        "COOKIES_ENABLED" : True
+        "COOKIES_ENABLED": True
     }
 
     def parse(self, response):

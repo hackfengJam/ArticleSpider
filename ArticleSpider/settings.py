@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -54,12 +54,14 @@ ROBOTSTXT_OBEY = False
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 
-
 DOWNLOADER_MIDDLEWARES = {
    'ArticleSpider.middlewares.RandomUserAgentMiddleware': 543,
-   'ArticleSpider.middlewares.RandomProxyMiddleware': 544,
+   # 'ArticleSpider.middlewares.JSPageMiddleware': 1,
+   # 'ArticleSpider.middlewares.RandomProxyMiddleware': 544,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
+
+
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -72,13 +74,15 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
     # 'scrapy.pipelines.images.ImagesPipeline': 1,
-    'ArticleSpider.pipelines.ArticleImagePipline': 1,
+    'ArticleSpider.pipelines.ArticleImagePipeline': 1,
+    'ArticleSpider.pipelines.ElasticsearchPipeline': 3,
     # 'ArticleSpider.pipelines.JsonWithEncodingPipeline': 2,
-    'ArticleSpider.pipelines.JsonExporterPipeline': 2,
+    # 'ArticleSpider.pipelines.JsonExporterPipeline': 2,
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(project_dir, 'images')
+# print(IMAGES_STORE)
 
 import os
 import sys
@@ -123,6 +127,7 @@ MYSQL_DBNAME = "jobble_article"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "123456"
 
+# JOBDIR = "job_info/001"
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 SQL_DATE_FORMAT = "%Y-%m-%d"
