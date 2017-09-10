@@ -3,8 +3,7 @@
 
 **注：**
 
->
-这是一个进阶项目，需要有一定的爬虫知识，如果不是很懂基本的爬虫原理，请自行学习一下爬虫基础知识。
+> 这是一个进阶项目，需要有一定的爬虫知识，如果不是很懂基本的爬虫原理，请自行学习一下爬虫基础知识。
 我有一个对应的仓库[MyPythonForSpider](http://git.oschina.net/hackfun/MyPythonForSpider "baidumusicspider")，是一个单线程爬取百度音乐数据的实例，比较适合刚入门的朋友。
 
 
