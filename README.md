@@ -8,22 +8,22 @@
 |-- 基础
 |   |-- 正则表达式 [jobbole.py](ArticleSpider/spiders/jobbole.py）
 |   |-- xpath （ArticleSpider/spiders/jobbole.py）
-|   `-- css选择器 （ArticleSpider/spiders/*.py）
-|   |-- ItemLoader
+|   |-- css选择器 （ArticleSpider/spiders/*.py）
+|   `-- ItemLoader
 |-- 进阶
-|   |-- 图片验证码的处理
+|   |-- 图片验证码的处理（ArticleSpider/spiders/lagou.login_after_captcha）
 |   |-- ip访问频率限制（ArticleSpider.middlewares.RandomProxyMiddleware）
 |   `-- user-agent随机切换（ArticleSpider.middlewares.RandomUserAgentMiddleware）
 |-- 高级
 |   |-- scrapy的原理
-|       |-- 基于scrapy的中间件开发
+|       `-- 基于scrapy的中间件开发
 |   |-- 动态网站的抓取处理
 |   |-- 将selenium集成到scrapy中 
 |   `-- scrapy log配置
-|-- |后续(在此项目中没有体现，后续我将上传此部分代码)
-|   |-- scrapy-redis分布式爬虫原理
-|   |-- scrapy-redis源码
-|   |-- 集成bloomfilter到scrapy-redis中
+`-- |后续(在此项目中没有体现，后续我将上传此部分代码)
+    |-- scrapy-redis分布式爬虫原理
+    |-- scrapy-redis源码
+    |-- 集成bloomfilter到scrapy-redis中
 </pre>
 
-
+**注：使用此代码前，需创建mysql数据库**
