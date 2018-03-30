@@ -38,3 +38,4 @@ Twisted==17.9.0
 urllib3==1.21.1
 w3lib==1.18.0
 zope.interface==4.4.3
+pillow==5.0.0
