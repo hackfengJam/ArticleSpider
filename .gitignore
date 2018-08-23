@@ -1,0 +1,12 @@
+*.pyc
+dep.sh
+config.yaml
+config.json
+env_*.py
+log/
+tmp/
+test.py
+.DS_Store
+apidoc/
+.idea/
+venv/
